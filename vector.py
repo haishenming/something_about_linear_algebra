@@ -61,6 +61,26 @@ class Vector(object):
             raise ZeroDivisionError("Cannot normalized the zero "
                                     "vector!")
 
+    def dot(self, v):
+        """ 计算点积 """
+        return sum([x*y for x, y in zip(self.coordinates, v.coordinates)])
+
+    def angle_with(self, v, in_degress=False):
+        """ 计算弧度 """
+        try:
+            u1 = self.normalized()
+            u2 = v.normalized()
+            angle_in_radians = math.acos(u1.dot(u2))
+            if in_degress:
+                degress_per_randian = 180.0 / math.pi
+                return angle_in_radians * degress_per_randian
+            else:
+                return angle_in_radians
+        except Exception as e:
+            raise e
+
+
+
 if __name__ == '__main__':
     vector = Vector([-0.221, 7.437])
     print(vector.magnitude())
