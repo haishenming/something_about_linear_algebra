@@ -156,8 +156,5 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-.idea/inspectionProfiles/
-.idea/misc.xml
-.idea/modules.xml
-.idea/something_about_linear_algebra.iml
-.idea/vcs.xml
+
+.idea
