@@ -79,6 +79,33 @@ class Vector(object):
         except Exception as e:
             raise e
 
+    def is_orthogonal_to(self, v, tolerance=1e-10):
+        """ 计算是否正交 """
+        return abs(self.dot(v)) < tolerance
+
+    def is_parallel_to(self, v):
+        """ 是否平行 """
+        return (
+            self.is_zero() or
+            v.is_zero() or
+            self.angle_with(v) == 0 or
+            self.angle_with(v) == math.pi
+        )
+
+    def is_zero(self, tolerance=1e-10):
+        """ 是否是零向量 """
+        return self.magnitude() < tolerance
+
+    def component_parallel_to(self, basis):
+        """ 计算投影 """
+        try:
+            u = basis.normalized()
+            weight = self.dot(u)
+            return u.times_scalar(weight)
+
+        except Exception as e:
+            return e
+
 
 
 if __name__ == '__main__':
