@@ -104,8 +104,30 @@ class Vector(object):
             return u.times_scalar(weight)
 
         except Exception as e:
-            return e
+            raise e
 
+    def cross(self, v):
+        """ 向量积 """
+        try:
+            x_1, y_1, z_1 = self.coordinates
+            x_2, y_2, z_2 = v.coordinates
+            new_coordinates = [
+                y_1*z_2 - y_2*z_1,
+                - (x_1*z_2 - x_2*z_1),
+                x_1*y_2 - x_2*y_1
+            ]
+
+            return Vector(new_coordinates)
+
+        except ValueError as e:
+            msg = str(e)
+            if msg == 'need nore than 2values to unpack':
+                self_embedded_in_R3 = Vector(self.coordinates + ('0',))
+                v_embedded_in_R3 = Vector(v.coordinates + ('0',))
+
+                return self_embedded_in_R3.cross(v_embedded_in_R3)
+            else:
+                raise e
 
 
 if __name__ == '__main__':
